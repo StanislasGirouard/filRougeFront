@@ -1,0 +1,30 @@
+
+.card {
+  width: 18rem;
+  &.bad-state {
+    background-color: #ff6769;
+  }
+}
+
+.card:hover {
+  animation: gelatine 0.5s infinite;
+}
+@keyframes gelatine {
+  0% {
+    background-color: red;
+  }
+  25% {
+    background-color: yellow;
+  }
+  50% {
+    background-color: green;
+  }
+  75% {
+    background-color: brown;
+  }
+  100% {
+    background-color: red;
+  }
+}
+
+

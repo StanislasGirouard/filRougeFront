@@ -1,0 +1,32 @@
+@if (auth.role == "ADMIN"){
+  <button class="mx-auto my-3 d-flex justify-content-center" routerLink="/new-product" mat-raised-button>Ajouter</button>
+}
+<div class="container">
+  <div class="row row-col-2 g-4">
+    @for (product of products; track $index) {
+      <div class="col-6 d-flex justify-content-center">
+        <div class="card" [class.bad-state]="product.state.id == 3" >
+          <img ImgSecured class="card-img-top" src="http://localhost:8080/produit/image/{{product.id}}" alt="produit">
+            <div class="card-body">
+              <h5 class="card-title">{{product.name}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted fst-italic">
+                <span>{{product.price}} € </span>
+                @for (label of product.labels; track $index) {
+                  <span class="border rounded p-1 m-1" [ngStyle]="{backgroundColor: label.color}"> {{label.name}} </span>
+                }
+              </h6>
+              <p class="card-text">{{product.description}} </p>
+              <p class="card-text">{{product.code}}</p>
+              <div class="d-flex">
+                @if (auth.role == "ADMIN"){
+                  <button class="m-2" mat-raised-button [routerLink]="['/edit-product',product.id]">Editer</button>
+                  <button class="m-2" mat-raised-button>Supprimer</button>
+                }
+                <button class="m-2" mat-raised-button>Acheter</button>
+              </div>
+            </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

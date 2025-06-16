@@ -1,0 +1,57 @@
+<form [formGroup]="form" (ngSubmit)="onAddProduct()" >
+  <mat-form-field >
+    <mat-label>Name</mat-label>
+    <input formControlName="name" matInput placeholder="Coca Cola">
+    @if(form.get("name")?.hasError("required")){
+      <mat-error>Le nom est requis</mat-error>
+    } @else if (form.get("name")?.hasError("minlength")) {
+      <mat-error>Le nom doit comporter au moins 3 caractères</mat-error>
+    } @else if (form.get("name")?.hasError("maxlength")) {
+      <mat-error>Le nom doit comporter au maximum 20 caractères</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field >
+    <mat-label>Code</mat-label>
+    <input formControlName="code" matInput placeholder="CC">
+    <mat-error>Le code est requis</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea formControlName="description" matInput placeholder="Ma description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field >
+    <mat-label>Price</mat-label>
+    <input formControlName="price" type="number" matInput placeholder="3€">
+    @if(form.get("price")?.hasError("required")){
+      <mat-error>Le prix est requis</mat-error>
+    } @else if (form.get("price")?.hasError("min")) {
+      <mat-error>Le prix ne doit pas etre egale à 0 </mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>State</mat-label>
+    <mat-select formControlName="state" [compareWith]="compareId">
+      @for (state of states; track $index) {
+        <mat-option [value]="state">{{state.name}}</mat-option>
+      }
+    </mat-select>
+    <mat-error>L'etat est requis</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Label</mat-label>
+    <mat-select formControlName="labels" multiple [compareWith]="compareId">
+      @for (label of labels; track $index) {
+        <mat-option [value]="label">{{label.name}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <app-file-chooser (selected)="onSelectedPicture($event)"></app-file-chooser>
+
+  <button type="submit" class="m-2" mat-raised-button><mat-icon [fontIcon]="editedProduct ? 'edit' : 'add'"></mat-icon>{{editedProduct ? "Editer le produit" : "Ajouter le produit"}}</button>
+</form>

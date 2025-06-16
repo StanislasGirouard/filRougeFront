@@ -1,0 +1,33 @@
+input {
+  display: none;
+}
+
+.fichier {
+  display: flex;
+  align-items: center;
+}
+
+.bouton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  border: 0.5px solid white;
+  width: 50px;
+  height: 50px;
+  background-color: #4E444B;
+  color: white;
+  user-select: none;
+
+  &:hover {
+    background-color: #5B5157;
+    cursor: pointer;
+  }
+}
+
+.my-file {
+  color: white;
+  margin-left: 3%;
+}
+
+
